@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/models/todo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,25 +30,54 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  List<Todo> todos=[];
+  final TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text('Todo List'),
+      body: Column(
+        children: [
+          Text('Todo List'),
+          TextField(
+            controller: controller,
+            decoration: const InputDecoration(
+              hintText: 'Bir todo girin',
+              icon: Icon(Icons.add),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: todos.length,
+              itemBuilder: (context, index){
+                return ListTile(
+                  title: Text(todos[index].text),
+                  leading: Checkbox(
+                    value: todos[index].isDone,
+                    onChanged:(value){
+                      setState(() {
+                      todos[index].isDone = !todos[index].isDone;
+                      });
+                    }
+                  )
+                );
+              }
+            )
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Todo ekleme kodu gelcek.
+          setState((){
+            todos.add(Todo(text: controller.text));
+            controller.clear();
+          });
+          print('Todo eklendi.');
         },
         child: const Icon(Icons.add)
       )
