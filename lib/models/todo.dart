@@ -1,7 +1,13 @@
 class Todo {
+  final String id;
   String text;
-  bool isDone = false;
-  Todo({required this.text});
+  bool isDone;  
+
+  Todo({
+    required this.id,
+    required this.text,
+    this.isDone = false,
+  });
 }
 
 
