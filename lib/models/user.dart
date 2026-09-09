@@ -25,4 +25,11 @@ class User {
       website: json['website'] as String,
     );
   }
+  String get initials {
+    final parts = name.trim().split('');
+    if(parts.length >= 2){
+      return (parts.first[0] + parts.last[0]).toUpperCase();
+    }
+    return name.isNotEmpty ? name[0].toUpperCase() : '?';
+  }
 }

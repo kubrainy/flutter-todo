@@ -56,7 +56,7 @@ class UserScreen extends StatelessWidget {
           itemBuilder: (context , index){
             final user = controller.users[index];
             return ListTile(
-              leading: CircleAvatar(child: Text('${user.id}')),
+              leading: CircleAvatar(child: Text(user.initials)),
               title: Text(user.name),
               subtitle: Text(user.email),
               onTap: () => Get.to(() => TodoListScreen(user: user)),
