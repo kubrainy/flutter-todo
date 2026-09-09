@@ -4,7 +4,12 @@ import '../models/todo.dart';
 
 class TodoController extends GetxController {
   final GetStorage _box = GetStorage();
-  static const _storageKey = 'todos';
+  final int userId;
+  TodoController({
+    required this.userId
+  });
+  
+  late final String _storageKey = 'todo_$userId';
 
   var todos = <Todo>[].obs;
 

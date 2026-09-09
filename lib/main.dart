@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'screens/todolist_screen.dart';
 import 'utils/theme.dart';
+import 'screens/user_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: currentMode,
-          home: TodoListScreen(title: 'Todo App'),
+          home: UserScreen(),
         );
       },
     );

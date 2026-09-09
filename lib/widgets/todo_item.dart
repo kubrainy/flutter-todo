@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../models/todo.dart';
 import '../controllers/todo_controller.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
+  final TodoController controller;
 
-  TodoItem({super.key, required this.todo});
+  TodoItem({super.key, required this.todo , required this.controller});
 
-  final TodoController controller = Get.find<TodoController>();
 
   void _showEditDialog(BuildContext context) {
     final editController = TextEditingController(text: todo.text);
