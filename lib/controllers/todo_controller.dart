@@ -1,8 +1,32 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import '../models/todo.dart';
 
 class TodoController extends GetxController {
+  final GetStorage _box = GetStorage();
+  static const _storageKey = 'todos';
+
   var todos = <Todo>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _loadFromStorage();
+    ever(todos, (_) => _saveToStorage());
+  }
+
+  void _loadFromStorage() {
+    final stored = _box.read<List>(_storageKey);
+    if (stored != null) {
+      todos.assignAll(
+        stored.map((e) => Todo.fromJson(Map<String, dynamic>.from(e))),
+      );
+    }
+  }
+
+  void _saveToStorage() {
+    _box.write(_storageKey, todos.map((t) => t.toJson()).toList());
+  }
 
   void addTodo(String text) {
     todos.add(Todo(
