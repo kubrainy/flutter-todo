@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../models/user.dart';
 import '../controllers/todo_controller.dart';
 import '../widgets/todo_input.dart';
 import '../widgets/todo_item.dart';
 import '../utils/theme.dart';
 
 class TodoListScreen extends StatelessWidget {
-  TodoListScreen({super.key, required this.title});
+  TodoListScreen({super.key, required this.user});
 
-  final String title;
-  final TodoController controller = Get.put(TodoController());
+  final User user;
+  late final TodoController controller = Get.put(TodoController(userId: user.id), tag:'${user.id}');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(title),
+        title: Text(user.name),
         centerTitle: true,
         actions: [
           ValueListenableBuilder<ThemeMode>(
@@ -39,13 +39,13 @@ class TodoListScreen extends StatelessWidget {
       body: Column(
         children: [
           const Text(' My Todo List'),
-          const TodoInput(),
+          TodoInput(controller: controller),
           Expanded(
             child: Obx(
               () => ListView.builder(
                 itemCount: controller.todos.length,
                 itemBuilder: (context, index) {
-                  return TodoItem(todo: controller.todos[index]);
+                  return TodoItem(todo: controller.todos[index] , controller: controller);
                 },
               ),
             ),

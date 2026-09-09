@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../controllers/todo_controller.dart';
 
 class TodoInput extends StatefulWidget {
-  const TodoInput({super.key});
+  final TodoController controller;
+  const TodoInput({super.key , required this.controller});
 
   @override
   State<TodoInput> createState() => _TodoInputState();
@@ -11,7 +11,6 @@ class TodoInput extends StatefulWidget {
 
 class _TodoInputState extends State<TodoInput> {
   final _textController = TextEditingController();
-  final TodoController controller = Get.find<TodoController>();
 
   @override
   void dispose() {
@@ -29,7 +28,7 @@ class _TodoInputState extends State<TodoInput> {
       );
       return;
     }
-    controller.addTodo(_textController.text.trim());
+    widget.controller.addTodo(_textController.text.trim());
     _textController.clear();
   }
 
