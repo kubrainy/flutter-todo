@@ -54,7 +54,7 @@ class UserScreen extends StatelessWidget {
         return Column(
           children: [
             Align(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
