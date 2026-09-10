@@ -13,7 +13,7 @@ class UserScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Kullanıcılar'),
+        title: const Text('Todo List'),
         centerTitle: true,
         actions: [
           ValueListenableBuilder<ThemeMode>(
@@ -51,17 +51,33 @@ class UserScreen extends StatelessWidget {
             ),
           );
         }
-        return ListView.builder(
-          itemCount: controller.users.length,
-          itemBuilder: (context , index){
-            final user = controller.users[index];
-            return ListTile(
-              leading: CircleAvatar(child: Text(user.initials)),
-              title: Text(user.name),
-              subtitle: Text(user.email),
-              onTap: () => Get.to(() => TodoListScreen(user: user)),
-            );
-          },
+        return Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Kullanıcılar',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: controller.users.length,
+                itemBuilder: (context, index) {
+                  final user = controller.users[index];
+                  return ListTile(
+                    leading: CircleAvatar(child: Text(user.initials)),
+                    title: Text(user.name),
+                    subtitle: Text(user.email),
+                    onTap: () => Get.to(() => TodoListScreen(user: user)),
+                  );
+                },
+              ),
+            ),
+          ],
         );
       }),
     );

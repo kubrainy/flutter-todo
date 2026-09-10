@@ -6,7 +6,7 @@ class TodoItem extends StatelessWidget {
   final Todo todo;
   final TodoController controller;
 
-  TodoItem({super.key, required this.todo , required this.controller});
+  const TodoItem({super.key, required this.todo , required this.controller});
 
 
   void _showEditDialog(BuildContext context) {
